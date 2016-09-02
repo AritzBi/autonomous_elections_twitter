@@ -55,9 +55,11 @@ if __name__ == '__main__':
     auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
     auth.set_access_token(USER_TOKEN, USER_SECRET)
     #api = tweepy.API(auth)
-    members_list = json.load(open('./twitter_ids.json','r'))
-    print members_list
+    basque_candidates = json.load(open('./basque_ids.json','r'))
+    galician_candidates = json.load(open('./galician_ids.json','r'))
+    candidates = basque_candidates + galician_candidates
+    print candidates
     listener = StdOutListener()
     stream = Stream(auth, listener)
-    stream.filter(follow=members_list)
+    stream.filter(follow=candidates)
     print 'Done'
